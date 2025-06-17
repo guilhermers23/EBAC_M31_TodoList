@@ -1,6 +1,16 @@
+import Sidebar from "./containers/Sidebar";
+import TaskList from "./containers/TaskList";
+import GlobalStyled, { Container } from "./styles";
+
 const App = () => {
   return (
-    <h1>Olá Redux</h1>
+    <>
+      <GlobalStyled />
+      <Container>
+        <Sidebar />
+        <TaskList />
+      </Container>
+    </>
   )
 };
 

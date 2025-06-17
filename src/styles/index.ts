@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyled = createGlobalStyle`
 *{
@@ -7,6 +7,13 @@ const GlobalStyled = createGlobalStyle`
     padding: 0;
     font-family: "Rubik", sans-serif;
 }
+`;
+
+export const Container = styled.div`
+  max-width: 1024px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 225px auto;
 `;
 
 export default GlobalStyled;
