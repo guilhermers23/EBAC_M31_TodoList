@@ -1,11 +1,15 @@
 import * as S from "./styled";
 
-export type PropsCard = { active?: boolean };
+export type PropsCard = {
+    active?: boolean;
+    label: string;
+    counter: number;
+};
 
-const CardFilter = ({ active }: PropsCard) => (
+const CardFilter = ({ active, label, counter }: PropsCard) => (
     <S.Card active={active}>
-        <S.Counter>7</S.Counter>
-        <S.Label>Pendentes</S.Label>
+        <S.Counter>{counter}</S.Counter>
+        <S.Label>{label}</S.Label>
     </S.Card>
 
 );

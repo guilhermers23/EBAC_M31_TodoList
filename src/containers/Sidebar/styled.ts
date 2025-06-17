@@ -8,8 +8,8 @@ export const Aside = styled.aside`
 
 export const Filters = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 8px;
+  grid-template-columns: 48% 48%;
+  gap: 4%;
   margin-top: 16px;
 `;
 
