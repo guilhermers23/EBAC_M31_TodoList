@@ -11,7 +11,6 @@ const GlobalStyled = createGlobalStyle`
 `;
 
 export const Container = styled.div`
-  max-width: 1024px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 225px auto;
