@@ -14,23 +14,23 @@ const Task = ({ title, priority, status, description }: PropsTask) => {
     return (
         <S.Card>
             <S.Title>{title}</S.Title>
-            <S.Tag>{priority}</S.Tag>
-            <S.Tag>{status}</S.Tag>
+            <S.Tag priorityColor={priority}>{priority}</S.Tag>
+            <S.Tag statusColor={status}>{status}</S.Tag>
             <S.Description value={description} readOnly={!edit} />
             <S.ActionsBar>
                 {edit ? (
                     <>
-                        <S.Button>Salvar</S.Button>
-                        <S.Button onClick={() => setEdit(false)}>Cancelar</S.Button>
+                        <S.SaveButton>Salvar</S.SaveButton>
+                        <S.RedButton onClick={() => setEdit(false)}>Cancelar</S.RedButton>
                     </>
                 ) : (
                     <>
                         <S.Button onClick={() => setEdit(true)}>Editar</S.Button>
-                        <S.Button>Remover</S.Button>
+                        <S.RedButton>Remover</S.RedButton>
                     </>
                 )}
             </S.ActionsBar>
-        </S.Card>
+        </S.Card >
     )
 };
 
