@@ -1,18 +1,25 @@
 import styled from "styled-components";
+import * as enums from "../../utilities/enums/TasksEnums";
 
 type PropsTagColor = {
-  statusColor?: string;
-  priorityColor?: string;
+  statusColor?: enums.Status;
+  priorityColor?: enums.Priority;
+  parameter: "Priority" | "Status";
 };
 
 const checkBackgroundColor = (props: PropsTagColor): string => {
-  if ("statusColor" in props) {
-    if (props.statusColor === "Pendente") return "var(--color-yellow)";
-    if (props.statusColor === "Concluído") return "var(--color-green)";
-  } else if ("priorityColor" in props) {
-    if (props.priorityColor === "Urgente") return "var(--color-red)";
-    if (props.priorityColor === "Importante") return "var(--color-warning)";
+  if (props.parameter === "Status") {
+    if (props.statusColor === enums.Status.PENDENTE)
+      return "var(--color-yellow)";
+    if (props.statusColor === enums.Status.CONCLUIDA)
+      return "var(--color-green)";
+  } else {
+    if (props.priorityColor === enums.Priority.URGENTE)
+      return "var(--color-red)";
+    if (props.priorityColor === enums.Priority.IMPORTANTE)
+      return "var(--color-warning)";
   }
+
   return "#CCC";
 };
 
