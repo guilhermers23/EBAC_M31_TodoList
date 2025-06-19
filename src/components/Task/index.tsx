@@ -1,15 +1,13 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { removeTask } from '../../store/reducers/tasks';
+import type TaskClass from '../../models/Task';
 import * as S from './styled';
-import * as enums from "../../utilities/enums/TasksEnums";
 
-type PropsTask = {
-    title: string;
-    priority: enums.Priority;
-    status: enums.Status;
-    description: string;
-};
+type PropsTask = TaskClass;
 
-const Task = ({ title, priority, status, description }: PropsTask) => {
+const Task = ({ id, title, priority, status, description }: PropsTask) => {
+    const dispatch = useDispatch();
     const [edit, setEdit] = useState(false);
 
     return (
@@ -27,7 +25,7 @@ const Task = ({ title, priority, status, description }: PropsTask) => {
                 ) : (
                     <>
                         <S.Button onClick={() => setEdit(true)}>Editar</S.Button>
-                        <S.RedButton>Remover</S.RedButton>
+                        <S.RedButton onClick={() => dispatch(removeTask(id))} >Remover</S.RedButton>
                     </>
                 )}
             </S.ActionsBar>
