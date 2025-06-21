@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import type { PropsCard } from ".";
 //Funçao de Omit
-type PropsCardActive = Omit<PropsCard, "label" | "counter">;
+//type PropsCardActive = Omit<PropsCard, "label" | "counter" | "value" | "criterion">;
+type PropsCardActive = { active: boolean };
 
 export const Card = styled.div<PropsCardActive>`
   padding: 8px;
@@ -9,6 +9,7 @@ export const Card = styled.div<PropsCardActive>`
   background-color: ${(props) => (props.active ? "#FFF" : "#fcfcfc")};
   color: ${(props) => (props.active ? "#1e90ff" : "#5e5e5e")};
   border-radius: 7px;
+  cursor: pointer;
 `;
 
 export const Counter = styled.span`

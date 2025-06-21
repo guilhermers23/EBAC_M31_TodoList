@@ -6,15 +6,30 @@ import type { RootReducer } from "../../store";
 
 const TaskList = () => {
     const { taskList } = useSelector((state: RootReducer) => state.tasks);
-    const { term } = useSelector((state: RootReducer) => state.filter);
+    const { term, criterion, value } = useSelector((state: RootReducer) => state.filter);
 
     const filterTasks = () => {
-        return taskList.filter(({ title }) => title.toLowerCase().search(term.toLowerCase()) >= 0);
+        let filteredTasks = taskList;
+        if (term !== undefined) {
+            filteredTasks = filteredTasks.filter(({ title }) => title.toLowerCase().search(term.toLowerCase()) >= 0);
+            if (criterion === "Priority") {
+                filteredTasks = filteredTasks.filter(({ priority }) => priority === value);
+            } else if (criterion === "Status") {
+                filteredTasks = filteredTasks.filter(({ status }) => status === value);
+            };
+            return filteredTasks;
+        } else {
+            return taskList
+        }
     };
 
     return (
         <S.Main>
             <p>2 tarefas marcadas como "todas" e "{term}".</p>
+            <ul>
+                <li>{criterion}</li>
+                <li>{value}</li>
+            </ul>
             <ul>
                 {filterTasks().map(({ id, title, priority, status, description }) => (
                     <li key={id}>

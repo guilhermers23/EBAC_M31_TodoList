@@ -1,17 +1,46 @@
 import * as S from "./styled";
+import * as enums from "../../utilities/enums/TasksEnums";
+import { useDispatch, useSelector } from "react-redux";
+import { changeFilter } from "../../store/reducers/filter";
+import type { RootReducer } from "../../store";
 
 export type PropsCard = {
-    active?: boolean;
     label: string;
-    counter: number;
+    criterion: "Priority" | "Status" | "All";
+    value?: enums.Priority | enums.Status;
 };
 
-const CardFilter = ({ active, label, counter }: PropsCard) => (
-    <S.Card active={active}>
-        <S.Counter>{counter}</S.Counter>
-        <S.Label>{label}</S.Label>
-    </S.Card>
+const CardFilter = ({ label, criterion, value }: PropsCard) => {
+    const dispatch = useDispatch();
+    const { filter, tasks } = useSelector((state: RootReducer) => state);
 
-);
+    const onFilter = () => { dispatch(changeFilter({ criterion, value })) };
+
+    const isActive = () => {
+        const isCriterion = filter.criterion === criterion;
+        const isValue = filter.value === value;
+        return isCriterion && isValue;
+    };
+
+    const counterTasks = () => {
+        if (criterion === "All") return tasks.taskList.length;
+        if (criterion === "Priority") {
+            return tasks.taskList.filter(({ priority }) => priority === value).length;
+        }
+        if (criterion === "Status") {
+            return tasks.taskList.filter(({ status }) => status === value).length;
+        }
+    };
+
+    const active = isActive();
+    const counter = counterTasks();
+
+    return (
+        <S.Card active={active} onClick={onFilter}>
+            <S.Counter>{counter}</S.Counter>
+            <S.Label>{label}</S.Label>
+        </S.Card>
+    )
+};
 
 export default CardFilter;

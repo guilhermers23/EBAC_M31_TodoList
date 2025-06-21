@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import CardFilter from "../../components/CardFilter";
 import type { RootReducer } from "../../store";
-import * as S from "./styled";
 import { changeTerm } from "../../store/reducers/filter";
+import CardFilter from "../../components/CardFilter";
+import * as S from "./styled";
+import * as enums from "../../utilities/enums/TasksEnums";
 
 const Sidebar = () => {
     const dispatch = useDispatch();
@@ -14,12 +15,12 @@ const Sidebar = () => {
             <div>
                 <S.Input type="text" placeholder="Buscar" value={term} onChange={onChangeTerm} />
                 <S.Filters>
-                    <CardFilter counter={15} label="Todos" active />
-                    <CardFilter counter={5} label="Pendentes" />
-                    <CardFilter counter={1} label="Importantes" />
-                    <CardFilter counter={3} label="Urgentes" />
-                    <CardFilter counter={4} label="Normal" />
-                    <CardFilter counter={2} label="Concluídos" />
+                    <CardFilter criterion="All" label="Todos" />
+                    <CardFilter value={enums.Priority.IMPORTANTE} criterion="Priority" label="Importantes" />
+                    <CardFilter value={enums.Priority.URGENTE} criterion="Priority" label="Urgentes" />
+                    <CardFilter value={enums.Priority.NORMAL} criterion="Priority" label="Normal" />
+                    <CardFilter value={enums.Status.PENDENTE} criterion="Status" label="Pendentes" />
+                    <CardFilter value={enums.Status.CONCLUIDA} criterion="Status" label="Concluídos" />
                 </S.Filters>
             </div>
         </S.Aside>
