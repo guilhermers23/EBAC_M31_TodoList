@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
+import type { RootReducer } from "../../store";
 import Task from "../../components/Task";
 import * as S from "./styled";
-import type { RootReducer } from "../../store";
 //import tasks from "../../JSON/task.json";
 
 const TaskList = () => {
@@ -23,15 +23,26 @@ const TaskList = () => {
         }
     };
 
+    const tasks = filterTasks();
+    const showMessage = (numberOfTasks: number) => {
+        let message = "";
+        const complement = term !== undefined && term.length > 0 ? `e "${term}"` : "";
+
+        if (criterion === "All") {
+            message = `${numberOfTasks} tarefa(s) encontrada(s) marcada(s) como: "Todas" ${complement}.`
+        }
+        else {
+            message = `${numberOfTasks} tarefa(s) encontrada(s) marcada(s) como: "${value}" ${complement}.`
+        }
+
+        return message;
+    };
+
     return (
         <S.Main>
-            <p>2 tarefas marcadas como "todas" e "{term}".</p>
+            <S.Message>{showMessage(tasks.length)}</S.Message>
             <ul>
-                <li>{criterion}</li>
-                <li>{value}</li>
-            </ul>
-            <ul>
-                {filterTasks().map(({ id, title, priority, status, description }) => (
+                {tasks.map(({ id, title, priority, status, description }) => (
                     <li key={id}>
                         <Task id={id} title={title} priority={priority} status={status} description={description} />
                     </li>
