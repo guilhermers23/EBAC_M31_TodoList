@@ -17,6 +17,7 @@ const GlobalStyled = createGlobalStyle`
     padding: 0;
     font-family: var(--font-rubik);
     list-style: none;
+    text-decoration: none;
 }
 `;
 
