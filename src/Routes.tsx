@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
+import Register from "./pages/Register";
 
 const AppRoutes = createBrowserRouter([
   {
@@ -8,7 +9,7 @@ const AppRoutes = createBrowserRouter([
   },
   {
     path: "/new_task",
-    element: <h1>Nova Tarefa</h1>
+    element: <Register />
   }
 ]);
 

@@ -1,14 +1,14 @@
 import * as enums from "../utilities/enums/TasksEnums";
 
 class Task {
-  id: number;
+  id: string;
   title: string;
   priority: enums.Priority;
   status: enums.Status;
   description: string;
 
   constructor(
-    id: number,
+    id: string,
     title: string,
     priority: enums.Priority,
     status: enums.Status,

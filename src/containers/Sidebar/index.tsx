@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootReducer } from "../../store";
 import { changeTerm } from "../../store/reducers/filter";
 import CardFilter from "../../components/CardFilter";
-import * as S from "./styled";
 import * as enums from "../../utilities/enums/TasksEnums";
+import * as S from "./styled";
+import * as GS from "../../styles";
 
 const Sidebar = () => {
     const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Sidebar = () => {
     return (
         <S.Aside>
             <div>
-                <S.Input type="text" placeholder="Buscar" value={term} onChange={onChangeTerm} />
+                <GS.Input type="text" placeholder="Buscar" value={term} onChange={onChangeTerm} />
                 <S.Filters>
                     <CardFilter criterion="All" label="Todos" />
                     <CardFilter value={enums.Priority.IMPORTANTE} criterion="Priority" label="Importantes" />

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import type { RootReducer } from "../../store";
 import Task from "../../components/Task";
-import * as S from "./styled";
+import * as GS from "../../styles";
 //import tasks from "../../JSON/task.json";
 
 const TaskList = () => {
@@ -39,8 +39,8 @@ const TaskList = () => {
     };
 
     return (
-        <S.Main>
-            <S.Message>{showMessage(tasks.length)}</S.Message>
+        <GS.Main>
+            <GS.Title as="p">{showMessage(tasks.length)}</GS.Title>
             <ul>
                 {tasks.map(({ id, title, priority, status, description }) => (
                     <li key={id}>
@@ -48,7 +48,7 @@ const TaskList = () => {
                     </li>
                 ))}
             </ul>
-        </S.Main>
+        </GS.Main>
     )
 };
 
