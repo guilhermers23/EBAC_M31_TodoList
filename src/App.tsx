@@ -1,16 +1,15 @@
 import { Provider } from "react-redux";
-import Sidebar from "./containers/Sidebar";
-import TaskList from "./containers/TaskList";
-import GlobalStyled, { Container } from "./styles";
+import { RouterProvider } from "react-router-dom";
 import store from "./store";
+import AppRoutes from "./Routes";
+import GlobalStyled, { Container } from "./styles";
 
 const App = () => {
   return (
     <Provider store={store}>
       <GlobalStyled />
       <Container>
-        <Sidebar />
-        <TaskList />
+        <RouterProvider router={AppRoutes} />
       </Container>
     </Provider>
   )

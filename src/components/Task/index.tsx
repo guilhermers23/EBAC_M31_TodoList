@@ -1,33 +1,69 @@
-import { useState } from 'react';
-import * as S from './styled';
+import { useState, type ChangeEvent } from 'react';
+import { useDispatch } from 'react-redux';
+import { removeTask, editTask, changeStatusTask } from '../../store/reducers/tasks';
+import type TaskClass from '../../models/Task';
 import * as enums from "../../utilities/enums/TasksEnums";
+import * as S from './styled';
+import * as GS from "../../styles";
 
-type PropsTask = {
-    title: string;
-    priority: enums.Priority;
-    status: enums.Status;
-    description: string;
-};
+type PropsTask = TaskClass;
 
-const Task = ({ title, priority, status, description }: PropsTask) => {
+const Task = ({ id, title, priority, status, description: originalDescription }: PropsTask) => {
+    const dispatch = useDispatch();
+    const [newDescription, setNewDescription] = useState(originalDescription);
     const [edit, setEdit] = useState(false);
+
+    // useEffect(() => {
+    //     if (originalDescription.length > 0) {
+    //         setNewDescription(originalDescription);
+    //     }
+    // }, [originalDescription]);
+
+    const cancelEdit = () => {
+        setEdit(false);
+        setNewDescription(originalDescription);
+    };
+
+    const saveEdit = () => {
+        dispatch(editTask({
+            id,
+            description: newDescription,
+            title,
+            priority,
+            status
+        }));
+        setEdit(false);
+    };
+
+    const OnChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(changeStatusTask({ id, completed: e.target.checked }))
+    };
 
     return (
         <S.Card>
-            <S.Title>{title}</S.Title>
-            <S.Tag parameter='Priority' priorityColor={priority}>{priority}</S.Tag>
-            <S.Tag parameter='Status' statusColor={status}>{status}</S.Tag>
-            <S.Description value={description} readOnly={!edit} />
+            <label htmlFor={title}>
+                <input type="checkbox" id={title} checked={status === enums.Status.CONCLUIDA}
+                    onChange={OnChangeStatus} />
+                <S.TitleTask>
+                    {edit && <em>Editando: </em>}
+                    {title}
+                </S.TitleTask>
+            </label>
+            <S.Tag parameter='Priority' prioritycolor={priority}>{priority}</S.Tag>
+            <S.Tag parameter='Status' statuscolor={status}>{status}</S.Tag>
+            <S.Description value={newDescription}
+                onChange={(e) => setNewDescription(e.target.value)}
+                readOnly={!edit} />
             <S.ActionsBar>
                 {edit ? (
                     <>
-                        <S.SaveButton>Salvar</S.SaveButton>
-                        <S.RedButton onClick={() => setEdit(false)}>Cancelar</S.RedButton>
+                        <GS.SaveButton onClick={saveEdit}>Salvar</GS.SaveButton>
+                        <GS.RedButton onClick={cancelEdit}>Cancelar</GS.RedButton>
                     </>
                 ) : (
                     <>
-                        <S.Button onClick={() => setEdit(true)}>Editar</S.Button>
-                        <S.RedButton>Remover</S.RedButton>
+                        <GS.Button onClick={() => setEdit(true)}>Editar</GS.Button>
+                        <GS.RedButton onClick={() => dispatch(removeTask(id))} >Remover</GS.RedButton>
                     </>
                 )}
             </S.ActionsBar>
