@@ -1,10 +1,10 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import * as enums from "../../utilities/enums/TasksEnums";
+import { addTask } from "../../store/reducers/tasks";
 import * as GS from "../../styles";
 import * as S from "./styled";
-import { addTask } from "../../store/reducers/tasks";
-import { useDispatch } from "react-redux";
 
 const Form = () => {
     const navigate = useNavigate();

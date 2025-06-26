@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import type { RootReducer } from "../../store";
 import Task from "../../components/Task";
 import * as GS from "../../styles";
-//import tasks from "../../JSON/task.json";
 
 const TaskList = () => {
     const { taskList } = useSelector((state: RootReducer) => state.tasks);
@@ -34,7 +33,6 @@ const TaskList = () => {
         else {
             message = `${numberOfTasks} tarefa(s) encontrada(s) marcada(s) como: "${value}" ${complement}.`
         }
-
         return message;
     };
 

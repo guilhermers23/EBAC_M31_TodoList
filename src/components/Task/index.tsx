@@ -35,6 +35,14 @@ const Task = ({ id, title, priority, status, description: originalDescription }:
         setEdit(false);
     };
 
+    const deleteTask = (id: number) => {
+        const result = confirm(" Deseja realmente excluir essa tarefa?");
+        if (result === true) {
+            dispatch(removeTask(id));
+        }
+        return;
+    };
+
     const OnChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(changeStatusTask({ id, completed: e.target.checked }))
     };
@@ -63,7 +71,7 @@ const Task = ({ id, title, priority, status, description: originalDescription }:
                 ) : (
                     <>
                         <GS.Button onClick={() => setEdit(true)}>Editar</GS.Button>
-                        <GS.RedButton onClick={() => dispatch(removeTask(id))} >Remover</GS.RedButton>
+                        <GS.RedButton onClick={() => deleteTask(id)} >Remover</GS.RedButton>
                     </>
                 )}
             </S.ActionsBar>
