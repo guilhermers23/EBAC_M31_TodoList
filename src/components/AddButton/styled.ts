@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const ButtonIcon = styled(Link)`
   height: 64px;
   width: 64px;
-  background-color: #44bd32;
+  background-color: var(--color-green);
   color: #fff;
   position: fixed;
   bottom: 48px;

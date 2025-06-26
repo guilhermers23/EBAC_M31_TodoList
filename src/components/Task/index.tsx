@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, type ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { removeTask, editTask } from '../../store/reducers/tasks';
+import { removeTask, editTask, changeStatusTask } from '../../store/reducers/tasks';
 import type TaskClass from '../../models/Task';
+import * as enums from "../../utilities/enums/TasksEnums";
 import * as S from './styled';
 import * as GS from "../../styles";
 
@@ -16,7 +17,7 @@ const Task = ({ id, title, priority, status, description: originalDescription }:
     //     if (originalDescription.length > 0) {
     //         setNewDescription(originalDescription);
     //     }
-    // }, [originalDescription])
+    // }, [originalDescription]);
 
     const cancelEdit = () => {
         setEdit(false);
@@ -34,11 +35,22 @@ const Task = ({ id, title, priority, status, description: originalDescription }:
         setEdit(false);
     };
 
+    const OnChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(changeStatusTask({ id, completed: e.target.checked }))
+    };
+
     return (
         <S.Card>
-            <S.TitleTask>{title}</S.TitleTask>
-            <S.Tag parameter='Priority' priorityColor={priority}>{priority}</S.Tag>
-            <S.Tag parameter='Status' statusColor={status}>{status}</S.Tag>
+            <label htmlFor={title}>
+                <input type="checkbox" id={title} checked={status === enums.Status.CONCLUIDA}
+                    onChange={OnChangeStatus} />
+                <S.TitleTask>
+                    {edit && <em>Editando: </em>}
+                    {title}
+                </S.TitleTask>
+            </label>
+            <S.Tag parameter='Priority' prioritycolor={priority}>{priority}</S.Tag>
+            <S.Tag parameter='Status' statuscolor={status}>{status}</S.Tag>
             <S.Description value={newDescription}
                 onChange={(e) => setNewDescription(e.target.value)}
                 readOnly={!edit} />

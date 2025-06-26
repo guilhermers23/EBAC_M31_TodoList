@@ -1,10 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuid } from "uuid";
 import * as enums from "../../utilities/enums/TasksEnums";
 import * as GS from "../../styles";
 import * as S from "./styled";
-import Task from "../../models/Task";
 import { addTask } from "../../store/reducers/tasks";
 import { useDispatch } from "react-redux";
 
@@ -16,10 +14,13 @@ const Form = () => {
     const [priority, setPriority] = useState(enums.Priority.NORMAL);
 
     const registerTask = (e: FormEvent) => {
-        const id = uuid();
         e.preventDefault();
-        const newTask = new Task(id, title, priority, enums.Status.PENDENTE, description);
-        dispatch(addTask(newTask));
+        dispatch(addTask({
+            title,
+            priority,
+            status: enums.Status.PENDENTE,
+            description
+        }));
         alert("Tarefa adicionada com sucesso!");
         navigate("/");
     };

@@ -2,21 +2,21 @@ import styled from "styled-components";
 import * as enums from "../../utilities/enums/TasksEnums";
 
 type PropsTagColor = {
-  statusColor?: enums.Status;
-  priorityColor?: enums.Priority;
+  statuscolor?: enums.Status;
+  prioritycolor?: enums.Priority;
   parameter: "Priority" | "Status";
 };
 
 const checkBackgroundColor = (props: PropsTagColor): string => {
   if (props.parameter === "Status") {
-    if (props.statusColor === enums.Status.PENDENTE)
+    if (props.statuscolor === enums.Status.PENDENTE)
       return "var(--color-yellow)";
-    if (props.statusColor === enums.Status.CONCLUIDA)
+    if (props.statuscolor === enums.Status.CONCLUIDA)
       return "var(--color-green)";
   } else {
-    if (props.priorityColor === enums.Priority.URGENTE)
+    if (props.prioritycolor === enums.Priority.URGENTE)
       return "var(--color-red)";
-    if (props.priorityColor === enums.Priority.IMPORTANTE)
+    if (props.prioritycolor === enums.Priority.IMPORTANTE)
       return "var(--color-warning)";
   }
 
@@ -29,6 +29,18 @@ export const Card = styled.div`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   margin-bottom: 32px;
   border-radius: 10px;
+
+  label {
+    display: flex;
+    align-items: center;
+    input {
+      width: 1.15em;
+      height: 1.15em;
+      border-radius: 0.15em;
+      margin-bottom: 16px;
+      margin-right: 8px;
+    }
+  }
 `;
 
 export const TitleTask = styled.h3`
