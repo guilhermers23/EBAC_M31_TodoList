@@ -1,54 +1,80 @@
-# React + TypeScript + Vite
+# ✅ EBAC Módulo 31 – ToDoList
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Descrição
 
-Currently, two official plugins are available:
+Aplicação de lista de tarefas desenvolvida com **React**, **TypeScript** e **Vite** como parte do curso Full Stack Python da EBAC (Módulo 31/32). O projeto tem como objetivo gerenciar tarefas com criação, edição, conclusão e exclusão, entregando uma experiência de produtividade simples para o usuário.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ⚙️ Tecnologias
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+*   **React** + **Vite** – Interface leve e rápido build com HMR
+*   **TypeScript** – Tipagem estática para mais confiabilidade
+*   **Redux Toolkit** – Gerência de estado com padrões modernos
+*   **ESLint + Prettier** – Padrões de código e formatação
+*   **HTML / CSS** – Estrutura básica e estilo personalizado
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 🎯 Funcionalidades
+
+*   Criar, editar e remover tarefas
+*   Marcar tarefas como concluídas
+*   Atualização instantânea da interface (hot reload)
+
+---
+
+## 🗂️ Estrutura de Pastas
+
+```css
+├── public/             # Arquivos estáticos (HTML, ícones)
+├── src/
+│   ├── components/     # UI: inputs, botões, lista de tarefas
+│   ├── store/          # Configuração do Redux e slices
+│   ├── App.tsx         # Componente raiz
+│   ├── main.tsx        # Ponto de entrada
+│   └── styles/         # CSS ou modules/component styles
+├── index.html
+├── vite.config.ts
+└── tsconfig.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚡ Scripts disponíveis
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+*   `npm run dev` – Ambiente de desenvolvimento com hot-reload
+*   `npm run build` – Build otimizado para produção
+*   `npm run lint` – Checagem de qualidade de código com ESLint
+*   `npm run preview` – Visualização do build final
+
+---
+
+## 🚀 Como executar
+
+1.  Clone o repositório
+    
+    ```css
+    git clone https://github.com/guilhermers23/EBAC_M31_TodoList.git
+    cd EBAC_M31_TodoList
+    ```
+    
+2.  Instale as dependências
+    
+    ```css
+    npm install
+    ```
+    
+3.  Execute o modo desenvolvimento
+    
+    ```css
+    npm run dev
+    ```
+    
+4.  Acesse `http://localhost:5173` (ou porta indicada pelo Vite)
+
+---
+
+## 📝 Licença
+
+Este projeto está sob licença MIT e aberto para contribuições e melhorias!
