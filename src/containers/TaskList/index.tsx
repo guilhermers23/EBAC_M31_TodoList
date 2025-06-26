@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
 import type { RootReducer } from "../../store";
+import { insertTasksExample } from "../../db/localStore";
 import Task from "../../components/Task";
 import * as GS from "../../styles";
 
 const TaskList = () => {
-    const { taskList } = useSelector((state: RootReducer) => state.tasks);
+    const taskList = useSelector((state: RootReducer) => state.tasks);
     const { term, criterion, value } = useSelector((state: RootReducer) => state.filter);
 
     const filterTasks = () => {
@@ -35,10 +36,16 @@ const TaskList = () => {
         }
         return message;
     };
+    //Carregar Tarefas para exemplo
+    const LoadTasksExample = () => {
+        insertTasksExample();
+        window.location.reload();
+    };
 
     return (
         <GS.Main>
             <GS.Title as="p">{showMessage(tasks.length)}</GS.Title>
+            {taskList.length === 0 && <GS.Button onClick={() => LoadTasksExample()}>Carregar Tarefas exemplo</GS.Button>}
             <ul>
                 {tasks.map(({ id, title, priority, status, description }) => (
                     <li key={id}>

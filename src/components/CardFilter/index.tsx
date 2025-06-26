@@ -23,12 +23,12 @@ const CardFilter = ({ label, criterion, value }: PropsCard) => {
     };
 
     const counterTasks = () => {
-        if (criterion === "All") return tasks.taskList.length;
+        if (criterion === "All") return tasks.length;
         if (criterion === "Priority") {
-            return tasks.taskList.filter(({ priority }) => priority === value).length;
+            return tasks.filter(({ priority }) => priority === value).length;
         }
         if (criterion === "Status") {
-            return tasks.taskList.filter(({ status }) => status === value).length;
+            return tasks.filter(({ status }) => status === value).length;
         }
     };
 
